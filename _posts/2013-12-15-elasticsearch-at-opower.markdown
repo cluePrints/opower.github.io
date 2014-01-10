@@ -5,9 +5,9 @@ author: ben.siemon
 ---
 
 We use [Elasticsearch](http://www.elasticsearch.org/) to provide real time
-analysis and segmentation of customer data. In the old world we used handcrafted
+analysis and segmentation of customer data. In the old world, we used handcrafted
 SQL scripts to massage and gain insight into customer data. By using the
-lightning fast query DSL of Elasticsearch we are able to craft targeted queries
+lightning fast query DSL of Elasticsearch, we are able to craft targeted queries
 at a far higher level of abstraction than using raw SQL.
 
 As we traveled the path of adopting Elasticsearch we found a few places that
@@ -56,7 +56,7 @@ public class ClientBackedBulkIndexer implements BulkIndexer {
 </bean>
 {% endhighlight %}
 
-Using the dependency injection capabilities of Spring we are able to
+Using the dependency injection capabilities of Spring, we are able to
 significantly DRY up usage of common Elasticsearch tasks. Without Spring we end
 up with methods that take a `Client`, index name and alias name sprinkled
 everywhere. This is a fairly basic example but should provide an idea of what to
@@ -239,7 +239,7 @@ which is acceptable for our batch processing jobs.
 
 #### Use static mappings
 
-Out of the box Elasticsearch is incredibly dynamic and malleable. These are
+Out of the box, Elasticsearch is incredibly dynamic and malleable. These are
 amazing features for POC work and getting to know Elasticsearch. Once you move
 to a production system the lack of constraints becomes a liability. Using static
 mapping forces indexing applications to only index data that conforms to the
