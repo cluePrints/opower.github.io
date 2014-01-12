@@ -16,7 +16,7 @@ To the disgust of myself and my wife, I collected shavings for approximately 4 m
 
 This last weekend, I took a trip to AC Moore Arts & Crafts and bought some clay.  I fashioned a mold into that clay of a mustache that would dominate all other mustaches.
 
-Into that mold, I poured elmer's glue, hair shavings, 14 gauge electrical copper wiring, more hair, more glue, more hair.
+Into that mold, I poured Elmer's glue, hair shavings, 14 gauge electrical copper wiring, more hair, more glue, and more hair.
 
 [![cinco_assembly](http://farm5.static.flickr.com/4035/4581864452_ba14d1b7ab.jpg)](http://www.flickr.com/photos/tom_vaughan/4581864452/)
 

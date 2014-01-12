@@ -13,11 +13,11 @@ categories:
 
 For the first five iterations, the dev team had been following this schedule:
 
-  * Iteration N, Week 1 = Design for iteration N and 2nd week of QA for iteration N-1
+  * Iteration N, Week 1 = Design for iteration N and 2nd week of QA for iteration N - 1
   * Iteration N, Week 2 = Development
   * Iteration N, Week 3 = Development
   * Iteration N, Week 4 = 1st week of QA for iteration N
-  * Iteration N, Week 5 / Iteration N +1, Week 1 = 2nd week of QA for iteration N, design for iteration N + 1
+  * Iteration N, Week 5 / Iteration N + 1, Week 1 = 2nd week of QA for iteration N, design for iteration N + 1
 
 We started to notice a couple things that have caused us to try out a new schedule in our upcoming 6th iteration.
 

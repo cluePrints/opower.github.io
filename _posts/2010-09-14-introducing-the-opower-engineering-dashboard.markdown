@@ -14,7 +14,7 @@ As Tom [mentioned]({% post_url 2010-07-27-maven-izing-googles-data-client-java-l
 
 Everyone did cool stuff. One group made a prototype of a website where you can enter your zip code, info about your home, and your last energy bill, and (via our Insight Engine) see how you compare to similar people across the country. Another group made an iPhone optimized version of our utility website. A third group went out and bought some plants to liven up the office.
 
-Adam, Jeff #3, Matt and I decided to focus our attention toward the TV we have mounted on the wall. It's been dormant since the World Cup, and we wanted to put it to better use. [Inspired by Panic](http://www.panic.com/blog/2010/03/the-panic-status-board/), we decided to build a dashboard for the engineering team.
+Adam, Jeff #3, Matt and I decided to focus our attention towards the TV we have mounted on the wall. It's been dormant since the World Cup, and we wanted to put it to better use. [Inspired by Panic](http://www.panic.com/blog/2010/03/the-panic-status-board/), we decided to build a dashboard for the engineering team.
 
 We brainstormed beforehand, and came up with a lot of ideas. However, to make sure we had something working to demo the next day, we decided to just focus on getting 1 or 2 small things done as a proof of concept. We first set up a simple [Sinatra](http://www.sinatrarb.com/) Ruby app to act as a shell. Next Matt, Jeff and I worked on pulling data from various APIs ([JIRA](http://docs.codehaus.org/display/JIRA4R/Examples), [Google Calendar](http://cookingandcoding.com/gcal4ruby/), Hudson, etc.) while Adam built a killer grid-based design.
 

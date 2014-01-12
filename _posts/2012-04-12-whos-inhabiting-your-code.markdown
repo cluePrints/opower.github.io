@@ -18,16 +18,16 @@ Paraphrasing some key points ...
 
 
 
-	
+
   * _Clarity for its own sake is an elusive goal_.  In my own experience, if I strive really hard to make some aspect of my code crystal clear (say, a challenging algorithm or data structure), it's at the expense of clarity in some other area. It's a bit like a game of [Whac-A-Mole](http://en.wikipedia.org/wiki/Whac-A-Mole).  Just as you can't write code that's infinitely flexible in the face of unknown future requirements, I don't think you can write code that's infinitely clear to an unknown future audience.
 
-	
-  * _Beauty becomes a constraint for future authors_.  It's hard to extend or update excessively beautiful code without spoiling some of its inherent loveliness.  An analogy to industrial design -- the MacBook Air achieves a certain level of elegance by ruthlessly eliminating functionality like replaceable batteries, integrated ethernet or a DVD drive.  How difficult would it be to add that stuff in later without compromising the original aesthetic?  Probably very.
 
-	
+  * _Beauty becomes a constraint for future authors_.  It's hard to extend or update excessively beautiful code without spoiling some of its inherent loveliness.  An analogy to industrial design -- the MacBook Air achieves a certain level of elegance by ruthlessly eliminating functionality like replaceable batteries, integrated Ethernet or a DVD drive.  How difficult would it be to add that stuff in later without compromising the original aesthetic?  Probably very.
+
+
   * _Habitable code makes its structure and intentions easy to understand_.  Structure, sure, but as a professional developer, the "and intentions" part seems pretty important.  You can read code to understand what it's doing, but it's not always obvious what problem the original author thought it was solving.  This is a hard thing to do right -- the best I've been able to do is document the problem being solved, and make the structure of the code appropriate to the solution.  Code reviews are a huge help in identifying areas that need improvement in either direction.
 
-	
+
   * _Habitable code makes developers feel at home_.  At [Opower](http://www.opower.com) we have a pretty good-sized body of coding conventions, some of which are automatically enforced using tools like Checkstyle and PMD.  To new hires, it sometimes seems totalitarian (it did to me). But once you've been around awhile, you notice a funny thing: you can go almost anywhere in our source base and see things done in a similar fashion.  This helps us transition from artifact to artifact more easily, and reduces the overhead in sharing code. Habitable, indeed.
 
 

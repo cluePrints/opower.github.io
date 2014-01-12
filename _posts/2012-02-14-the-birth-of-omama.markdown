@@ -90,6 +90,6 @@ It took a couple of trials and errors with transfer mediums and acrylic viscosit
 
 We've got a couple pieces of code that are central to the business that cause some newcomers to scratch their heads -- our participant eligibility code and the orchestrating energy calculator code in particular have a certain notoriety.  Tyler and I thought those would make good fodder for abstract art, so we knocked off a Modrian and a Pollock to produce the next two works, "Composition with Eligibility" and "Energy Calculator":
 
-The final (and best) pieces were put up in Ben's office.  "Self Portrait" is an 42.5" x 77" blow up of his facebook photo, pasted up inside his office window.  To discourage tampering with the gallery's centerpiece, Tyler and I cut a couple of pieces of plexiglass to fit and sealed it in to his window frame with some 1x2x80"s and industrial sealing foam.
+The final (and best) pieces were put up in Ben's office.  "Self Portrait" is an 42.5" x 77" blow up of his Facebook photo, pasted up inside his office window.  To discourage tampering with the gallery's centerpiece, Tyler and I cut a couple of pieces of plexiglass to fit and sealed it in to his window frame with some 1x2x80"s and industrial sealing foam.
 
 Ben's been a great sport about it, but as the head of User Experience _and_ Product, I'm starting to get nervous at the creative energies he has at his disposal for the next battle in this war.  Stay tuned!

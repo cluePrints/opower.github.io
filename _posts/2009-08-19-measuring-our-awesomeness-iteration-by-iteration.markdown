@@ -18,7 +18,7 @@ tags:
 ---
 
 
-Like a lot of startups (and big companies!) we use iterative development: we break up our work into "stories" describing features and implement as many as we can in one month.  We then repeat that until we conquer the world.  But, if we can do more, or work more efficiently with each iteration, our goal of world domination will approach that much quicker :)
+Like a lot of startups (and big companies!) we use iterative development: we break up our work into "stories" describing features and implement as many as we can in one month.  We then repeat that until we conquer the world.  But, if we can do more, or work more efficiently with each iteration, our goal of world domination will approach that much quicker. :)
 
 
 
@@ -39,7 +39,7 @@ After a few iterations, Anh (our beloved program manager) ran some queries on ou
 
 
 
-While Anh's hand-jammed report was awesome, manually connecting SQLite and Excel is no fun for anyone.  I whipped up a basic Ruby application using [Sinatra](http://www.sinatrarb.com/) to automate most of what we'd like to see.  We can now see how long critical defects site open and unfixed, as well as how many overall defects we're fixing and even the _root source_ of our defects (e.g. did we get the wrong requirements, or just mess up implementing them?) 
+While Anh's hand-jammed report was awesome, manually connecting SQLite and Excel is no fun for anyone.  I whipped up a basic Ruby application using [Sinatra](http://www.sinatrarb.com/) to automate most of what we'd like to see.  We can now see how long critical defects site open and unfixed, as well as how many overall defects we're fixing and even the _root source_ of our defects (i.e. did we get the wrong requirements, or just mess up implementing them?)
 
 
 
