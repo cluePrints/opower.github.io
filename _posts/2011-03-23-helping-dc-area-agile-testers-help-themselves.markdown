@@ -14,9 +14,9 @@ The [DC Agile Software Testing MeetUp group](http://www.meetup.com/D-CAST/) met 
 
 We're looking for "Better Ways To Make Better Software".
 
-Agile software development is a great way to make good software that satisfies real needs and creates real value to those who build and use that software. Everyone on the team is concerned with the quality of the product. However, sometimes it can be an overwhelming task being the team member whose job it is to insure that the quality of the product is sufficient.
+Agile software development is a great way to make good software that satisfies real needs and creates real value to those who build and use that software. Everyone on the team is concerned with the quality of the product. However, sometimes it can be an overwhelming task to be the team member whose job it is to insure that the quality of the product is sufficient.
 
-DCAST was created to develop a community of those interested in agile software testing who are also interested in testing agile products more effectively and more efficiently. By sharing our hard won knowledge we can all help make each other's lives easier and more productive.
+DCAST was created to develop a community of those interested in agile software testing who are also interested in testing agile products more effectively and more efficiently. By sharing our hard won knowledge, we can all help make each other's lives easier and more productive.
 
 If you're interested in sharing how you have raised the quality bar of your agile processes, we would love it if you were a part of this community. If you're interested in learning (or want to all learn together), you're even more welcome.
 

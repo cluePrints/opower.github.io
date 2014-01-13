@@ -21,7 +21,7 @@ Well, we here at OPOWER loved our Duck Hunt, so we've been attempting to use "Ag
   * Be scientific about development...[measure, measure measure]({% post_url 2009-08-19-measuring-our-awesomeness-iteration-by-iteration %}).  We track velocities, average-open-days-per-bug-by-severity, etc.
   * "Individuals and interactions over processes and tools"...we self-organize, aren't afraid to try new combinations of responsibilities and assignments, provide regular feedback to each other and we don't dictate a development environment or technology stack.
 
-The best thing about the technical side of this company is that the entire development team and project management team is on-board with the idea of rapid iterations, continuous improvement and a focus on technical excellent and "maximizing the amount of work not done."
+The best thing about the technical side of this company is that the entire development team and project management team is on-board with the idea of rapid iterations, continuous improvement and a focus on technical excellence and "maximizing the amount of work not done."
 
 This manifests itself in several practices that I'd chalk up in the "pro" column:
 

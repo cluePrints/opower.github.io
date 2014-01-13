@@ -29,7 +29,7 @@ something like this:
 
 
 
-    
+
     timestamp    data     metadata
        2013      1.09
        2012      0.87
@@ -57,7 +57,7 @@ get.addColumn("metadata");
 get.setTimeRange(2012, 2013);
 {% endhighlight %}
 
-Unfortunately that `get` would not return us any data for the metadata column,
+Unfortunately, that `get` would not return us any data for the metadata column,
 because there is no valid cell in that timerange.  We have two options: make
 a second `get` for the metadata or figure out some other solution.  That second
 solution is timeshifting.
@@ -73,7 +73,7 @@ look like this:
 
 
 
-    
+
     timestamp    data     metadata
       52011               "house"
        2013      1.09
@@ -93,7 +93,7 @@ setting an ending timestamp to be the logical "end of time":
 
 
 
-    
+
 {% highlight java %}
 Get get = new Get(rowkey);
 get.addColumn("data");
@@ -118,7 +118,7 @@ with `Result#getColumnLatest()`.
 
 
 
-Yes, there is a problem for the future us of the year 52,011, but I'm betting we
+Yes, there is a problem for the future us of the year 52011, but I'm betting we
 will all be using relational databases again by that point.
 
 

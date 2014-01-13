@@ -11,7 +11,7 @@ categories:
 - Culture
 ---
 
-I'm currently reading Matthew Crawford's "Shop Class as Soulcraft" who writes about how manual labor can make you spiritually whole. To get us to look at work in new ways, he describes work using the categories: _assertiveness_ and _attentiveness_. Crawford writes that work is not exclusively assertive or attentive and that to obtain the spiritualism that comes from manual work, you need balanced quantities of both. Too much assertiveness, and you may destroy your work, while too much attentiveness and you could go out of business. Soulcraft is being able to apply just the right amount of each.
+I'm currently reading Matthew Crawford's "Shop Class as Soulcraft" who writes about how manual labor can make you spiritually whole. To get us to look at work in new ways, he describes work using the categories: _assertiveness_ and _attentiveness_. Crawford writes that work is not exclusively assertive or attentive and that to obtain the spiritualism that comes from manual work, you need balanced quantities of both. Too much assertiveness may mean you may destroy your work, while too much attentiveness may mean you could go out of business. Soulcraft is being able to apply just the right amount of each.
 
 I believe that Crawford's categories can extend beyond the realm of manual labor. His descriptions really got me thinking about how they would apply to software engineering. What is "assertive" and "attentive" software engineering? I've always felt that programming brings with it a sort of spiritualistic satisfaction. Now Crawford gives me tools to examine programming in new ways.
 
@@ -25,6 +25,6 @@ I want to reflect more upon our reactive scalability work because I think this s
 
 The attentive programmer knows that truth is the path to the right solution, and that's exactly how we approach problems on the Scale team. I think the key to a good scalability engineer is attentiveness and checking preconceived notions at the door. This type of programmer needs lots of experience and must be open to a wide range of ideas where hunches based upon past experiences or fresh perspectives can be quickly dismissed or followed based upon the facts.
 
-To me probably nothing is more satisfying than taking a piece of code, no matter how complicated, that no one has been able to make go fast and making it fly. I'm always ready for the next problem and always wondering what I'm going to learn from that puzzle.
+To me, probably nothing is more satisfying than taking a piece of code, no matter how complicated, that no one has been able to make go fast and making it fly. I'm always ready for the next problem and always wondering what I'm going to learn from that puzzle.
 
 Are you an attentive or assertive programmer, or some combination of? Why? Thinking about how you approach software engineering may help you raise your game and bring with it the satisfaction of rising above the status quo.

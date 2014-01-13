@@ -19,9 +19,9 @@ One thing I've noticed about successful candidates is _polish_.  This isn't a wo
 So, what do I mean by "polish"?  Here's a few examples:
 
   * Make your code _better_ than you would "at work."  Don't make me download the JUnit jar and type ``javac `find . -name "*.java"` `` to compile your code; give me a `pom.xml` or Ant file with Ivy support.
-  * Send PDFs instead of MS-Word; they are so much easier on the eyes (and processor).  This is dead simple on OS X, [there's some free options for Windows](http://www.cutepdf.com/products/cutepdf/writer.asp), and there's always [LaTeX](http://www.latex-project.org/) (which will definitely earn you some geek cred :)
+  * Send PDFs instead of MS-Word; they are so much easier on the eyes (and processor).  This is dead simple on OS X, [there are some free options for Windows](http://www.cutepdf.com/products/cutepdf/writer.asp), and there's always [LaTeX](http://www.latex-project.org/) (which will definitely earn you some geek cred :)
   * Don't send me the functional spec of your last project and call it a résumé.  Use bullet lists, short sentences, and formatting to create an easy-to-scan CV.
   * Format your writing; compare [this](/img/sloppy.jpg), to [this](/img/polished.jpg).  Even though they both are excerpts from correctly-answered quizzes, which one is going to be easier and more engaging for me to read?
-  * English: [do you speak it?](http://www.imdb.com/title/tt0110912/quotes).  Being able to communicate effectively using the written word is absolutely **crucial** for being a good developer, especially at OPOWER.  It doesn't need to be your first, or even best, language; you just need to wield it as effectively as you do Java
+  * English: [do you speak it?](http://www.imdb.com/title/tt0110912/quotes).  Being able to communicate effectively using the written word is absolutely **crucial** for being a good developer, especially at OPOWER.  It doesn't need to be your first, or even best, language; you just need to wield it as effectively as you do Java.
 
 A lack of polish won't get you refused, but putting an extra shine on your application can make you stand out quite a bit.

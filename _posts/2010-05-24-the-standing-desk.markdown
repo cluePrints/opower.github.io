@@ -14,7 +14,7 @@ tags:
 - standing desk
 ---
 
-Dave, My OPOWER colleague switched from a normal office desk & chair situation to a standing desk more than a year ago and ever since, I'd been considering doing the same.  For my entire programming career, I've had terrible posture in my chair and tended to do "the maxell pose" where my wrists are resting at a severe angle on the lip of my desk.
+Dave, my OPOWER colleague, switched from a normal office desk & chair situation to a standing desk more than a year ago and ever since, I'd been considering doing the same.  For my entire programming career, I've had terrible posture in my chair and tended to do "the maxell pose" where my wrists are resting at a severe angle on the lip of my desk.
 
 ![The Maxwell Pose](/img/maxell_blown_away.jpg)
 

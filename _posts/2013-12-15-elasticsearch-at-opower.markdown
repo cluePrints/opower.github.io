@@ -10,7 +10,7 @@ SQL scripts to massage and gain insight into customer data. By using the
 lightning fast query DSL of Elasticsearch, we are able to craft targeted queries
 at a far higher level of abstraction than using raw SQL.
 
-As we traveled the path of adopting Elasticsearch we found a few places that
+As we traveled the path of adopting Elasticsearch, we found a few places that
 needed additional code to fit in with our technology stack at Opower. In this
 post I will go over a few of these spots and how we chose to solve them.
 
@@ -23,7 +23,7 @@ DAOs and other Spring idioms. We created a small set of Spring context files
 that wire together a given
 [Client](http://www.elasticsearch.org/guide/en/elasticsearch/client/java-api/current/client.html)
 with services that provide thin wrappers around indexing and searching.
-     
+
 An abstraction built over the bulk index capabilities of the `Client` object could
 be exposed via Spring like:
 
@@ -32,7 +32,7 @@ public class ClientBackedBulkIndexer implements BulkIndexer {
 
     private Client client;
 
-    public void index(Iterable<Map<String,Object>> documents) { 
+    public void index(Iterable<Map<String,Object>> documents) {
         //use the provided client to bulk index this stream of documents.
     }
 
@@ -57,7 +57,7 @@ public class ClientBackedBulkIndexer implements BulkIndexer {
 {% endhighlight %}
 
 Using the dependency injection capabilities of Spring, we are able to
-significantly DRY up usage of common Elasticsearch tasks. Without Spring we end
+significantly DRY up usage of common Elasticsearch tasks. Without Spring, we end
 up with methods that take a `Client`, index name and alias name sprinkled
 everywhere. This is a fairly basic example but should provide an idea of what to
 expect when using the out of the box Java `Client`.
@@ -65,8 +65,8 @@ expect when using the out of the box Java `Client`.
 ### Index Creation and Maintenance
 
 Immutability is one of the driving forces behind the speed and correctness of
-Elasticsearch. However embracing immutability comes with a price. When an index
-is created it is assigned an immutable number of shards. This is OK up to the
+Elasticsearch. However, embracing immutability comes with a price. When an index
+is created, it is assigned an immutable number of shards. This is OK up to the
 point that the size of your data in a given index grows beyond the capacity of
 the configured shard count. At this point you are faced with a choice: scale up
 or out. We developed a framework that allows us to easily scale indices out.
@@ -76,8 +76,8 @@ without deleting it and recreating it with more shards assigned. Fortunately
 Elasticsearch provides a built in primitive to solve this problem:
 [aliases](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html).
 Each alias may be assigned a number of indices. Users then query the alias and
-receives results from each underlying index. So using an alias we are able to
-transparently add more shards by adding new indices to the alias
+receives results from each underlying index. So using an alias, we are able to
+transparently add more shards by adding new indices to the alias.
 
 Now that we have a way to add new indices, and ultimately shards, we need a way
 to create new indices that have identical mappings and settings. A simple way to
@@ -187,7 +187,7 @@ growing. Some examples of this are: log messages (See
 <bean id="strategy"
       class="com.opower.elasticsearch.provisioning.TimeSeriesProvisionStrategy">
     <property name="client" ref="client"/>
-</bean>    
+</bean>
 
 <bean id="indexProvisioningService"
       class="com.opower.elasticsearch.schema.SimpleIndexProvisioningService">
@@ -196,14 +196,14 @@ growing. Some examples of this are: log messages (See
 </bean>
 {% endhighlight %}
 
-In this case the `TimeSeriesProvisionStrategy` checks the document count in the
+In this case, the `TimeSeriesProvisionStrategy` checks the document count in the
 active index then creates new indices if warranted. Consuming client code is only
-required to call `indexProvisioningService.provisionIndex(...)`
+required to call `indexProvisioningService.provisionIndex(...)`.
 
 #### User data
 
 User data grows in proportion to your user base. Initial shard counts could end
-up fitting your needs but that likely means your company is not growing. Let's
+up fitting your needs, but that likely means your company is not growing. Let's
 consider the more interesting case of growth. Ideally it is a simple matter of
 setting a few configuration parameters to expand the capacity of your existing
 index by automatically creating new shards.
@@ -228,7 +228,7 @@ added.
 
 #### When returning all IDs from a query
 
-By default queries created by
+By default, queries created by
 [SearchRequestBuilder](https://github.com/elasticsearch/elasticsearch/blob/c7f6c5266d15fefa1a5ce9ae7ffc519c5ff8abbe/src/main/java/org/elasticsearch/action/search/SearchRequestBuilder.java)
 will return all stored fields in the `getHits()`. If you are returning say 100k
 documents from a query it can take up to a full minute to read all these
@@ -266,7 +266,7 @@ operation.
 
 ### Here be dragons
 
-Ultimately our experience with Elasticsearch has been incredibly positive.
+Ultimately, our experience with Elasticsearch has been incredibly positive.
 Development by the Elasticsearch core team and the community at large continues
 at a breakneck pace. That being said, Elasticsearch is a relatively new
 datastore and is not for the faint of heart. A ready appetite for reading the

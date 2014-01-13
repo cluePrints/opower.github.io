@@ -11,11 +11,11 @@ categories:
 - Maven
 ---
 
-OPOWER's first Innovation Day was a lot of fun.  I was waiting about 30 minutes for my primary project (building an AWS machine image for our hudson slave) to complete and I got sucked in to a different project involving automatically downloading google analytics for all the traffic on all the websites we host for our clients.
+OPOWER's first Innovation Day was a lot of fun.  I was waiting about 30 minutes for my primary project (building an AWS machine image for our Hudson slave) to complete and I got sucked in to a different project involving automatically downloading Google Analytics for all the traffic on all the websites we host for our clients.
 
-Clicking around google's well-documented "get started" guides, it looked like they haven't made their client JARs available in any MVN repos anywhere.  There is a (not-google-sponsored) source forge project that points to a sonatype repo, but instead of adding another 3rd party repo to our small but growing list, I figured it'd be easier for small proof of concept purposes to just manually install the google JARs in OPOWER's repo (thereby making them accessible to all our developer's boxes).
+Clicking around Google's well-documented "get started" guides, it looked like they haven't made their client JARs available in any mvn repos anywhere.  There is a (not-google-sponsored) SourceForge project that points to a Sonatype repo, but instead of adding another 3rd party repo to our small but growing list, I figured it'd be easier for small proof of concept purposes to just manually install the google JARs in OPOWER's repo (thereby making them accessible to all our developer's boxes).
 
-It quickly became clear that the number of JARs google ships with makes it faster and less error prone to script the mvn repo installation than doing manual command line copy & pasting.  Lo, my gift to the world:
+It quickly became clear that the number of JARs Google ships with makes it faster and less error prone to script the mvn repo installation than doing manual command line copy & pasting.  Lo and behold, my gift to the world:
 
   1. Grab latest JARs from the "gdata-java" link here: [http://code.google.com/p/gdata-java-client/downloads/list](http://code.google.com/p/gdata-java-client/downloads/list)
   1. Unzip on the server hosting your company's mvn repo
@@ -79,13 +79,13 @@ It quickly became clear that the number of JARs google ships with makes it faste
           }
 
   1. Don't forget to `chmod 755 *.pl`
-  1. Then just run `./installall.pl` and all those google JARs should get installed in your repo
+  1. Then just run `./installall.pl` and all those Google JARs should get installed in your repo
 
 That assumes the "mvn" executable was in your path and that you run the scripts from within the same directory as all the JARs, but it's easily modified for whatever your situation may be.
 
-Note that relative to `./lib` there are 2 jars in `../deps/` that you should also install in your repo because the google JARs to avoid ClassNotFoundExceptions in some runtime code paths.
+Note that relative to `./lib`, there are 2 jars in `../deps/` that you should also install in your repo because the Google JARs to avoid ClassNotFoundExceptions in some runtime code paths.
 
-Once in, you should be able to boot strap a mvn client project against a Google Data source with a pom not too dissimilar from:
+Once in, you should be able to bootstrap a mvn client project against a Google Data source with a pom not too dissimilar from:
 
 {% highlight xml %}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -95,11 +95,11 @@ Once in, you should be able to boot strap a mvn client project against a Google 
   <packaging>jar</packaging>
   <version>1.0.0-SNAPSHOT</version>
   <name>Google Client Example</name>
-    
+
   <scm>
     <developerConnection>foo</developerConnection>
   </scm>
-    
+
   <dependencies>
     <dependency>
         <groupId>com.google.gdata</groupId>

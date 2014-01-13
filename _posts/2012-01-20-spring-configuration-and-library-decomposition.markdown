@@ -11,11 +11,11 @@ categories:
 - Spring
 ---
 
-Opower's evolved rapidly in the last 24 months and nowhere is that more true than in our code base.  Two years ago we had 2 flagship applications that shared model objects, DAOs and a handful of utility classes with one common JAR.  Since then we've expanded to the point where (not even counting all the Ruby or Scala stuff) we're managing:
+Opower has evolved rapidly in the last 24 months and nowhere is that more true than in our code base.  Two years ago we had 2 flagship applications that shared model objects, DAOs and a handful of utility classes with one common JAR.  Since then we've expanded to the point where (not even counting all the Ruby or Scala stuff) we're managing:
 
   * 4 WAR applications
   * 33 JAR libraries (1 open sourced @ [https://github.com/opower/jpile](https://github.com/opower/jpile))
-  * 14 "pom artifacts" that define groupings of projects and organize dependencies, versions, etc
+  * 14 "pom artifacts" that define groupings of projects and organize dependencies, versions, etc.
 
 Not all of that growth was brand new, however.  As we expanded our product lines and thought more about the best way to scale our core features we invested heavily in the decomposition of existing WARs and improving the "librarification" of our code.  In addition to supporting scaling, improving the modularity of our code base also supports a move towards S.O.A. and improves the velocity of our scrum teams.  After all, it's a lot easier to focus on developing the stories in your iteration if you don't need to worry about stepping on another team's toes.  That's more easily achievable when your team aligns to one specific code artifact.
 
@@ -23,7 +23,7 @@ A problem we quickly ran in to as we started decomposing WARs and JARs was the c
 
 [![One WAR depending on two JARs with duplicated spring bean configuration](/img/pic11-300x161.png)](/img/pic11.png)
 
-Note that the WAR includes the two JARs and wires together beans declared in the JARs with an applicationContext.xml defined in the WAR.  We thought it would be a good idea to adopt the policy of "keep the tests close to the code that they stress."  That's a sensible policy, but resulted in duplication of context configuration found in the WAR for the purposes of spinning up Spring contexts during integration tests.
+Note that the WAR includes the two JARs and wires together beans declared in the JARs with an `applicationContext.xml` defined in the WAR.  We thought it would be a good idea to adopt the policy of "keep the tests close to the code that they stress."  That's a sensible policy, but resulted in duplication of context configuration found in the WAR for the purposes of spinning up Spring contexts during integration tests.
 
 Reducing that duplication was done by continuing the theme of decomposition and applying it to the Spring context as well.  For example, we adopted the policy that a JAR should export a sensible "default wiring" of the classes that it encapsulates.  We adopted naming conventions to facilitate the need to either explicitly or implicitly include a Spring context snippet.
 

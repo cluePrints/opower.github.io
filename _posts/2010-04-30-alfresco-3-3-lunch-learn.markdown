@@ -14,7 +14,7 @@ tags:
 - Content Management
 ---
 
-I attended the Reston, VA "Alfresco 3.3 lunch & learn" seminar this week, hosted by the generous folks over at [SiteWorx](http://www.siteworx.com/).  I have a couple years as "CMS guru" at some previous jobs so in addition to being interested in the field, I'm also the support guy in-house for our CMS needs.
+I attended the Reston, VA "Alfresco 3.3 lunch & learn" seminar this week, hosted by the generous folks over at [SiteWorx](http://www.siteworx.com/).  I have a couple years as "CMS guru" at some previous jobs, so in addition to being interested in the field, I'm also the support guy in-house for our CMS needs.
 
 We here at OPOWER use Alfresco Community 3.2 as a glorified "XML editing tool" that was easy to setup, configure and hand over to the business to allow them to contribute XML-based content that our applications can consume.  As a F/LOSS solution, it's fit our needs pretty well and is generally a low-maintenance piece of our infrastructure.
 
