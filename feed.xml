@@ -273,7 +273,7 @@ at a breakneck pace. That being said, Elasticsearch is a relatively new
 datastore and is not for the faint of heart. A ready appetite for reading the
 core Elasticsearch code is your best friend in times of trouble.&lt;/p&gt;
 </description>
-            <pubDate>Sun, 15 Dec 2013 00:00:00 -0800</pubDate>
+            <pubDate>Sun, 15 Dec 2013 00:00:00 -0500</pubDate>
             <link>http://opower.github.io/2013/12/15/elasticsearch-at-opower</link>
             <guid isPermaLink="true">http://opower.github.io/2013/12/15/elasticsearch-at-opower</guid>
         </item>
@@ -341,7 +341,7 @@ but while waiting for the committers to accept them, we have been able to go
 about our regularly scheduled releases, confident in the code we are running.&lt;/p&gt;
 
 </description>
-            <pubDate>Mon, 11 Nov 2013 00:00:00 -0800</pubDate>
+            <pubDate>Mon, 11 Nov 2013 00:00:00 -0500</pubDate>
             <link>http://opower.github.io/2013/11/11/how-we-fork-at-opower</link>
             <guid isPermaLink="true">http://opower.github.io/2013/11/11/how-we-fork-at-opower</guid>
         </item>
@@ -435,7 +435,7 @@ nice soundtrack and voilà.&lt;/p&gt;
 &lt;p&gt;Where are the explosions I hear you say? Well, maybe next time. After all,
 this is going to production in just a few weeks.&lt;/p&gt;
 </description>
-            <pubDate>Sun, 01 Sep 2013 00:00:00 -0700</pubDate>
+            <pubDate>Sun, 01 Sep 2013 00:00:00 -0400</pubDate>
             <link>http://opower.github.io/2013/09/01/the-big-data-elders-archeology-hour</link>
             <guid isPermaLink="true">http://opower.github.io/2013/09/01/the-big-data-elders-archeology-hour</guid>
         </item>
@@ -543,7 +543,7 @@ The villagers talked for a while and came back to the elders with a reward.&lt;/
 
 &lt;iframe width=&quot;600&quot; height=&quot;337&quot; src=&quot;http://player.vimeo.com/video/70606335&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 </description>
-            <pubDate>Sun, 07 Jul 2013 00:00:00 -0700</pubDate>
+            <pubDate>Sun, 07 Jul 2013 00:00:00 -0400</pubDate>
             <link>http://opower.github.io/2013/07/07/the-story-of-the-big-data-elders</link>
             <guid isPermaLink="true">http://opower.github.io/2013/07/07/the-story-of-the-big-data-elders</guid>
         </item>
@@ -629,7 +629,7 @@ with &lt;code&gt;Result#getColumnLatest()&lt;/code&gt;.&lt;/p&gt;
 will all be using relational databases again by that point.&lt;/p&gt;
 
 </description>
-            <pubDate>Fri, 29 Mar 2013 17:10:26 -0700</pubDate>
+            <pubDate>Fri, 29 Mar 2013 20:10:26 -0400</pubDate>
             <link>http://opower.github.io/2013/03/29/timeshifting-in-hbase</link>
             <guid isPermaLink="true">http://opower.github.io/2013/03/29/timeshifting-in-hbase</guid>
         </item>
@@ -640,7 +640,7 @@ will all be using relational databases again by that point.&lt;/p&gt;
 
 &lt;iframe width=&quot;420&quot; height=&quot;315&quot; src=&quot;//www.youtube.com/embed/7Fa7KW5AfXQ?rel=0&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 </description>
-            <pubDate>Fri, 12 Oct 2012 12:36:03 -0700</pubDate>
+            <pubDate>Fri, 12 Oct 2012 15:36:03 -0400</pubDate>
             <link>http://opower.github.io/2012/10/12/with-all-apologies-to-psy</link>
             <guid isPermaLink="true">http://opower.github.io/2012/10/12/with-all-apologies-to-psy</guid>
         </item>
@@ -770,7 +770,7 @@ default-autowire=&amp;quot;byName&amp;quot;&amp;gt;
 
 &lt;p&gt;Upgrading to the 1.0.0.M6 version of the spring-security-oauth JAR caused some of its own problems which ended up just being another package change (the &lt;code&gt;ProtectedResourceProcessingFilter&lt;/code&gt; class ended up moving from &lt;code&gt;org.springframework.security.oauth.provider&lt;/code&gt; to &lt;code&gt;org.springframework.security.oauth.provider.filter&lt;/code&gt;).&lt;/p&gt;
 </description>
-            <pubDate>Thu, 06 Sep 2012 13:25:14 -0700</pubDate>
+            <pubDate>Thu, 06 Sep 2012 16:25:14 -0400</pubDate>
             <link>http://opower.github.io/2012/09/06/upgrading-from-spring-3-0-x-to-spring-3-1-x</link>
             <guid isPermaLink="true">http://opower.github.io/2012/09/06/upgrading-from-spring-3-0-x-to-spring-3-1-x</guid>
         </item>
@@ -813,7 +813,7 @@ default-autowire=&amp;quot;byName&amp;quot;&amp;gt;
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-            <pubDate>Thu, 12 Apr 2012 08:51:29 -0700</pubDate>
+            <pubDate>Thu, 12 Apr 2012 11:51:29 -0400</pubDate>
             <link>http://opower.github.io/2012/04/12/whos-inhabiting-your-code</link>
             <guid isPermaLink="true">http://opower.github.io/2012/04/12/whos-inhabiting-your-code</guid>
         </item>
@@ -904,7 +904,7 @@ default-autowire=&amp;quot;byName&amp;quot;&amp;gt;
 
 &lt;p&gt;Ben&amp;rsquo;s been a great sport about it, but as the head of User Experience &lt;em&gt;and&lt;/em&gt; Product, I&amp;rsquo;m starting to get nervous at the creative energies he has at his disposal for the next battle in this war.  Stay tuned!&lt;/p&gt;
 </description>
-            <pubDate>Tue, 14 Feb 2012 08:05:22 -0800</pubDate>
+            <pubDate>Tue, 14 Feb 2012 11:05:22 -0500</pubDate>
             <link>http://opower.github.io/2012/02/14/the-birth-of-omama</link>
             <guid isPermaLink="true">http://opower.github.io/2012/02/14/the-birth-of-omama</guid>
         </item>
@@ -972,7 +972,7 @@ default-autowire=&amp;quot;byName&amp;quot;&amp;gt;
   &lt;li&gt;It&amp;rsquo;s tempting to eliminate application.properties wherever there&amp;rsquo;s a default, but we avoided that for documentation reasons &amp;ndash; we wanted to provide the implementers and users of our software with a one-stop location to discover and understand the configurability of our applications.  Thus, we adopted a standard that even if an application property is defaulted in a JAR&amp;rsquo;s spring context snippet, we still explicitly declare that property in a WAR&amp;rsquo;s top-level application.property and document how that property affects the system.&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-            <pubDate>Fri, 20 Jan 2012 09:26:07 -0800</pubDate>
+            <pubDate>Fri, 20 Jan 2012 12:26:07 -0500</pubDate>
             <link>http://opower.github.io/2012/01/20/spring-configuration-and-library-decomposition</link>
             <guid isPermaLink="true">http://opower.github.io/2012/01/20/spring-configuration-and-library-decomposition</guid>
         </item>
