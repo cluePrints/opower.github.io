@@ -57,6 +57,29 @@
                 <div class="posts">
   
   <div class="post">
+    <h2><a class="title" href="/2015/01/30/rest-client-tools">Making REST Services Easy to Consume with rest-client-tools</a></h2>
+    <p class="meta">by <a href="/authors/chris-phillips">Chris Phillips</a>
+ | January 30, 2015</p>
+    <div class="clearfix"></div>
+    <div class="post-content">
+    <p>Early in our SOA journey at Opower, we established the practice of providing
+client jars for our REST services to save clients the hassle of implementing
+repetitive client code and dealing with the error-prone concerns like
+authentication, error handling, retries, resource management, message
+serialization. Early client jars were based on the Resteasy Proxy Framework. The
+way it works is you create a java interface that describes the REST endpoints
+using the standard JAX-RS annotations. On the server side, you implement that
+interface. On the client side, you pass that same interface to the Resteasy
+Proxy Framework to generate a client proxy that will do all of the work needed
+to call that endpoint (build and execute the http request, serialization /
+deserialization of request and response bodies etc). As time goes on and the API
+changes, this helps keep the client in sync with the API specification. </p>
+
+
+    </div>
+  </div>
+  
+  <div class="post">
     <h2><a class="title" href="/2013/12/15/elasticsearch-at-opower">Elasticsearch at Opower</a></h2>
     <p class="meta">by <a href="/authors/ben-siemon">Ben Siemon</a>
  | December 15, 2013</p>
@@ -110,32 +133,6 @@ reveal the modern, specific, and, sometimes dirty, details.</p>
     <p>There was a time, not so long ago, when everything was dark. Everything was
 dark except for a few rapidly moving glyphs that none could really understand.
 None could understand except for a few elders who had spent months of studying.</p>
-
-
-    </div>
-  </div>
-  
-  <div class="post">
-    <h2><a class="title" href="/2013/03/29/timeshifting-in-hbase">Timeshifting in HBase</a></h2>
-    <p class="meta">by <a href="/authors/jeff-kolesky">Jeff Kolesky</a>
- | March 29, 2013</p>
-    <div class="clearfix"></div>
-    <div class="post-content">
-    <p>For our HBase table layout, we are following an entity-centric model,
-evangelized to us by our friends at <a href="http://www.wibidata.com">WibiData</a>.  The idea is to put all of the
-data about a single entity into a single row in HBase.  When you need to run
-a computation that involves that entity&rsquo;s data, you have quick access to it by
-the row key, and all of the data is stored close together on disk.
-Additionally, against many <a href="http://www.ngdata.com/site/blog/62-ng.html">suggestions</a> from the HBase community,
-and general confusion about <a href="https://issues.apache.org/jira/browse/HBASE-2406">how timestamps work</a>, we are using
-timestamps with logical values.  Instead of just letting the region server
-assign a timestamp version to each cell, we are explicitly setting those values
-so that we can use timestamp as a true queryable dimension in our <code>get</code>s and
-<code>scan</code>s.  In addition to the real timeseries data that is indexed using the cell
-timestamp, we also have other columns that store metadata about the entity.
-That data does not need to be logically timestamped, and we always just want the
-most recent version of it.  Given this description, rows in the table look
-something like this:</p>
 
 
     </div>

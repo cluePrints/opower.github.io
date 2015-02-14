@@ -7,6 +7,134 @@
         <atom:link href="http://opower.github.io/feed.xml" rel="self" type="application/rss+xml" />
         
         <item>
+            <title>Making REST Services Easy to Consume with rest-client-tools</title>
+            <description>&lt;p&gt;Early in our SOA journey at Opower, we established the practice of providing
+client jars for our REST services to save clients the hassle of implementing
+repetitive client code and dealing with the error-prone concerns like
+authentication, error handling, retries, resource management, message
+serialization. Early client jars were based on the Resteasy Proxy Framework. The
+way it works is you create a java interface that describes the REST endpoints
+using the standard JAX-RS annotations. On the server side, you implement that
+interface. On the client side, you pass that same interface to the Resteasy
+Proxy Framework to generate a client proxy that will do all of the work needed
+to call that endpoint (build and execute the http request, serialization /
+deserialization of request and response bodies etc). As time goes on and the API
+changes, this helps keep the client in sync with the API specification. &lt;/p&gt;
+
+&lt;p&gt;In our case, the client jars, authored by service writers, would subclass a
+BasicClient class that used the &lt;a href=&quot;http://docs.jboss.org/resteasy/docs/3.0.9.Final/userguide/html_single/index.html#d4e2143&quot;&gt;Resteasy Proxy
+Framework&lt;/a&gt;
+to generate the proxies. This approach worked well for a time, but we
+encountered problems that required us to make changes. As soon as we had to
+deploy service clients into legacy applications, we discovered that using the
+Resteasy Proxy Framework in the same JVM as another JAX-RS implementation &amp;ndash;
+including other versions of Resteasy &amp;ndash; triggers runtime exceptions due to
+implementation conflicts. The heart of the matter lies in how JAX-RS initializes
+a javax.ws.rs.ext.RuntimeDelegate
+&lt;a href=&quot;http://docs.oracle.com/javaee/6/api/javax/ws/rs/ext/RuntimeDelegate.html#getInstance()&quot;&gt;instance&lt;/a&gt;.
+Only one RuntimeDelegate is loaded per JVM and one version of Jersey or Resteasy
+wins. Then when your Resteasy client proxy tries to use the Jersey
+RuntimeDelegate you get Exceptions such as the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  java.lang.ClassCastException: com.sun.jersey.server.impl.provider.RuntimeDelegateImpl
+             cannot be cast to org.jboss.resteasy.spi.ResteasyProviderFactory
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Switching every existing application over to the same version of Resteasy was
+not an option for us. Thus rest-client-tools was born. In essence, we started
+with Resteasy and made several key changes to remove runtime conflicts and
+ensure portability:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Extracted the client proxy generation code from Resteasy.&lt;/li&gt;
+  &lt;li&gt;Refactored that code so that we no longer use the RuntimeDelegate when creating
+client proxies.&lt;/li&gt;
+  &lt;li&gt;Heavily tested client proxies alongside different versions of Jersey and
+Resteasy at runtime to demonstrate compatibility.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We changed the client jars for our services to use this early version of
+rest-client-tools instead of Resteasy for proxy generation and the runtime
+conflicts went away. &lt;/p&gt;
+
+&lt;p&gt;This solution worked well for a somewhat shorter period of time. The number of
+services deployed grew at an accelerating pace. The graph of interconnected
+services also grew more complex and that’s when we ran into our next problem:
+dependency hell (the problem that SOA was supposed to prevent). The problem
+appeared in applications that had to call multiple services meaning they
+imported multiple client jars. The client jars were authored by service writers
+and required several transitive dependencies. In some cases, writers of one
+service had upgraded some of the dependencies required by their client jar. This
+caused runtime conflicts with the dependencies from the client jar from another
+team who had yet to make similar upgrades. To correct this problem we had to
+make a few more changes both to the code in rest-client-tools and the
+conventions we established for service writers and consumers. &lt;/p&gt;
+
+&lt;p&gt;First we now require service writers to provide a jar with just the resource
+interface and any dependant model objects. This is less work for service authors
+since they only have to create the interface and model objects instead of a
+full-blown client jar. We take special care to ensure that resource interfaces
+don’t have extra transitive dependencies as well. You could be really extreme in
+this and only allow JDK classes (0 transitive dependencies) in resource
+interfaces. However, we have identified a few stable libraries that do a good
+job with backwards compatibility such as joda-time or guava, and we allow
+resource interfaces to use  them as dependencies. Without carefully controlling
+the dependencies, we could end up with the same dependency hell as before. &lt;/p&gt;
+
+&lt;p&gt;Additionally, we refactored the API of rest-client-tools to a set of fluent
+builders. Instead of a subclass that implements the resource interface, you pass
+the resource interface to the builder and get an instance of that interface
+back. &lt;/p&gt;
+
+&lt;p&gt;Finally, we integrated the &lt;a href=&quot;https://github.com/Netflix/Hystrix&quot;&gt;Hystrix&lt;/a&gt;
+library. If you’re not familiar with Hystrix check out
+&lt;a href=&quot;http://techblog.netflix.com/2012/11/hystrix.html&quot;&gt;this&lt;/a&gt; article from the
+Netflix tech blog.&lt;/p&gt;
+
+&lt;p&gt;“In a distributed environment, failure of any given service is inevitable.
+Hystrix is a library designed to control the interactions between these
+distributed services providing greater tolerance of latency and failure. Hystrix
+does this by isolating points of access between the services, stopping cascading
+failures across them, and providing fallback options, all of which improve the
+system&amp;rsquo;s overall resiliency. “&lt;/p&gt;
+
+&lt;p&gt;rest-client-tools allows you to generate client proxies that automatically wrap
+resource invocations in HystrixCommands. This added layer of resource isolation
+can be quite valuable in a complicated graph of dependant services. &lt;/p&gt;
+
+&lt;p&gt;Now, when you need to consume a REST service, you just import the resource
+interface jar and rest-client-tools. Since rest-client-tools only appears on
+your classpath once, you can consume any number of services in this manner
+without conflict. The ensures that client applications:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;have maximum control over what libraries appear on their classpath&lt;/li&gt;
+  &lt;li&gt;benefit from the convenience of auto generated client proxies&lt;/li&gt;
+  &lt;li&gt;run a relatively small risk of dependency hell&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Internal services are not the only scenario where rest-client-tools is helpful.
+We have used rest-client-tools to consume 3rd party APIs as well. All we have to
+do is create a resource interface that describes the endpoints for the 3rd party
+API, and client can use that to easily consume a service.&lt;/p&gt;
+
+&lt;p&gt;With rest-client-tools we feel we have struck a nice balance by providing a
+useful client library while minimizing coupling when using it. Since both the
+server and client use the same resource interface, API changes can be managed
+more easily and client code can be upgraded easily. Client proxies created with
+rest-client-tools can run alongside any JAX-RS implementation without conflict,
+are more flexible and can be used in a broad set of scenarios.&lt;/p&gt;
+
+&lt;p&gt;For more information and examples checkout our github repo
+&lt;a href=&quot;https://github.com/opower/rest-client-tools&quot;&gt;here&lt;/a&gt;. &lt;/p&gt;
+
+</description>
+            <pubDate>Fri, 30 Jan 2015 00:00:00 -0500</pubDate>
+            <link>http://opower.github.io/2015/01/30/rest-client-tools</link>
+            <guid isPermaLink="true">http://opower.github.io/2015/01/30/rest-client-tools</guid>
+        </item>
+        
+        <item>
             <title>Elasticsearch at Opower</title>
             <description>&lt;p&gt;We use &lt;a href=&quot;http://www.elasticsearch.org/&quot;&gt;Elasticsearch&lt;/a&gt; to provide real time
 analysis and segmentation of customer data. In the old world, we used handcrafted
@@ -907,74 +1035,6 @@ default-autowire=&amp;quot;byName&amp;quot;&amp;gt;
             <pubDate>Tue, 14 Feb 2012 11:05:22 -0500</pubDate>
             <link>http://opower.github.io/2012/02/14/the-birth-of-omama</link>
             <guid isPermaLink="true">http://opower.github.io/2012/02/14/the-birth-of-omama</guid>
-        </item>
-        
-        <item>
-            <title>Spring Configuration and Library Decomposition</title>
-            <description>&lt;p&gt;Opower has evolved rapidly in the last 24 months and nowhere is that more true than in our code base.  Two years ago we had 2 flagship applications that shared model objects, DAOs and a handful of utility classes with one common JAR.  Since then we&amp;rsquo;ve expanded to the point where (not even counting all the Ruby or Scala stuff) we&amp;rsquo;re managing:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;4 WAR applications&lt;/li&gt;
-  &lt;li&gt;33 JAR libraries (1 open sourced @ &lt;a href=&quot;https://github.com/opower/jpile&quot;&gt;https://github.com/opower/jpile&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;14 &amp;ldquo;pom artifacts&amp;rdquo; that define groupings of projects and organize dependencies, versions, etc.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Not all of that growth was brand new, however.  As we expanded our product lines and thought more about the best way to scale our core features we invested heavily in the decomposition of existing WARs and improving the &amp;ldquo;librarification&amp;rdquo; of our code.  In addition to supporting scaling, improving the modularity of our code base also supports a move towards S.O.A. and improves the velocity of our scrum teams.  After all, it&amp;rsquo;s a lot easier to focus on developing the stories in your iteration if you don&amp;rsquo;t need to worry about stepping on another team&amp;rsquo;s toes.  That&amp;rsquo;s more easily achievable when your team aligns to one specific code artifact.&lt;/p&gt;
-
-&lt;p&gt;A problem we quickly ran in to as we started decomposing WARs and JARs was the creation of a lot of redundant spring configuration files &amp;ndash; especially in an integration test context.  Here&amp;rsquo;s a crude picture of our initial state following some decomposition:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/img/pic11.png&quot;&gt;&lt;img src=&quot;/img/pic11-300x161.png&quot; alt=&quot;One WAR depending on two JARs with duplicated spring bean configuration&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Note that the WAR includes the two JARs and wires together beans declared in the JARs with an &lt;code&gt;applicationContext.xml&lt;/code&gt; defined in the WAR.  We thought it would be a good idea to adopt the policy of &amp;ldquo;keep the tests close to the code that they stress.&amp;rdquo;  That&amp;rsquo;s a sensible policy, but resulted in duplication of context configuration found in the WAR for the purposes of spinning up Spring contexts during integration tests.&lt;/p&gt;
-
-&lt;p&gt;Reducing that duplication was done by continuing the theme of decomposition and applying it to the Spring context as well.  For example, we adopted the policy that a JAR should export a sensible &amp;ldquo;default wiring&amp;rdquo; of the classes that it encapsulates.  We adopted naming conventions to facilitate the need to either explicitly or implicitly include a Spring context snippet.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;If a JAR includes a context file ending in &amp;ldquo;-spring.xml&amp;rdquo; then it&amp;rsquo;s automatically included by any WAR that declares a dependency on that JAR.&lt;/li&gt;
-  &lt;li&gt;On the other hand, if a JAR includes a context file ending in &amp;ldquo;Context.xml&amp;rdquo; then it is only brought in to the WAR&amp;rsquo;s context with an explicitly declared inclusion of that file.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Here&amp;rsquo;s what the picture looked like when we migrated to that model:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/img/pic21.png&quot;&gt;&lt;img src=&quot;/img/pic21-300x170.png&quot; alt=&quot;One WAR with two JARs, but no duplicated bean configuration&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Integration tests that lived in our various JARs liked living in this model because they could always import &amp;ldquo;*-spring.xml&amp;rdquo; and their integration test context would come up and run just fine.&lt;/p&gt;
-
-&lt;p&gt;This worked well until we encountered some situations where one JAR started depending on another JAR.  We wanted to ship sensible Spring context defaults from both JARs, but because of the &amp;ldquo;*-spring.xml&amp;rdquo; rule we ended up needing to duplicate all of the application properties that were needed to wire up the beans in the depended artifact from within the src/test/resources directory of the dependent JAR.  Here&amp;rsquo;s a picture to explain what I mean:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/img/pic31.png&quot;&gt;&lt;img src=&quot;/img/pic31-300x184.png&quot; alt=&quot;Application properties starting to proliferate&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;This problem just got worse as you got more and more descended from a given library &amp;ndash; for example, if jar-A depends on jar-B depends on jar-C and they all ship with their own &amp;ldquo;*-spring.xml&amp;rdquo; files we needed to define properties to configure C within jar-B &lt;strong&gt;and&lt;/strong&gt; we needed to define properties to configure jar-B and jar-C within jar-A.  It was getting hairy.&lt;/p&gt;
-
-&lt;p&gt;To solve this we adopted a new standard that basically amounts to &amp;ldquo;provide sensible defaults for our sensible defaults&amp;rdquo;: any bean in a &amp;ldquo;*-spring.xml&amp;rdquo; snippet that can be configured with a PropertyPlaceholderConfigurer must provide a sensible default for that property.  So a bean definition might have looked like this before:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;foo&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;opower.Foo&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;locale&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;${locale}&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;After:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;foo&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;opower.Foo&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;locale&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;${locale:en_US}&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The defaulting of application properties allowed us to eliminate 90% of the boilerplate test properties and code that we would have otherwise needed and allows for a greater abstraction of thought when a developer decides to pull in a library.  Thus, our current setup looks something like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/img/pic41.png&quot;&gt;&lt;img src=&quot;/img/pic41-300x150.png&quot; alt=&quot;Defaulted properties eliminates almost all configuration&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;A couple of tricks to note when using this model:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;There&amp;rsquo;s a big difference in classpath context scanning between &amp;ldquo;classpath:/&lt;em&gt;-spring.xml&amp;rdquo; and &amp;ldquo;classpath&lt;/em&gt;:/&lt;em&gt;-spring.xml&amp;rdquo;.  The first (with just one star) will pull in all the files that match &amp;ldquo;&lt;/em&gt;-spring.xml&amp;rdquo; in the &lt;em&gt;first&lt;/em&gt; directory on your classpath that contains any file matching that expression and then stop.  The second version (with classpath*) will do what you&amp;rsquo;d expect&amp;hellip; it pulls in all files that match &amp;ldquo;*-spring.xml&amp;rdquo; from every directory in scans in your classpath.&lt;/li&gt;
-  &lt;li&gt;Application property defaulting accepts literals after the colon, so it&amp;rsquo;s safe to do something like &lt;code&gt;${path:file:///blah}&lt;/code&gt; to default the property to the string &lt;code&gt;file:///blah&lt;/code&gt;.  You can also change the default string separator in the &lt;code&gt;PropertyPlaceholderConfigurer&lt;/code&gt; bean so your defaults look more like this: &lt;code&gt;${path?file:///blah}&lt;/code&gt;  (using a &amp;ldquo;?&amp;rdquo; as a separator)&lt;/li&gt;
-  &lt;li&gt;It&amp;rsquo;s tempting to eliminate application.properties wherever there&amp;rsquo;s a default, but we avoided that for documentation reasons &amp;ndash; we wanted to provide the implementers and users of our software with a one-stop location to discover and understand the configurability of our applications.  Thus, we adopted a standard that even if an application property is defaulted in a JAR&amp;rsquo;s spring context snippet, we still explicitly declare that property in a WAR&amp;rsquo;s top-level application.property and document how that property affects the system.&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-            <pubDate>Fri, 20 Jan 2012 12:26:07 -0500</pubDate>
-            <link>http://opower.github.io/2012/01/20/spring-configuration-and-library-decomposition</link>
-            <guid isPermaLink="true">http://opower.github.io/2012/01/20/spring-configuration-and-library-decomposition</guid>
         </item>
         
     </channel>

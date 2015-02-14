@@ -57,6 +57,32 @@
                 <div class="posts">
   
   <div class="post">
+    <h2><a class="title" href="/2013/03/29/timeshifting-in-hbase">Timeshifting in HBase</a></h2>
+    <p class="meta">by <a href="/authors/jeff-kolesky">Jeff Kolesky</a>
+ | March 29, 2013</p>
+    <div class="clearfix"></div>
+    <div class="post-content">
+    <p>For our HBase table layout, we are following an entity-centric model,
+evangelized to us by our friends at <a href="http://www.wibidata.com">WibiData</a>.  The idea is to put all of the
+data about a single entity into a single row in HBase.  When you need to run
+a computation that involves that entity&rsquo;s data, you have quick access to it by
+the row key, and all of the data is stored close together on disk.
+Additionally, against many <a href="http://www.ngdata.com/site/blog/62-ng.html">suggestions</a> from the HBase community,
+and general confusion about <a href="https://issues.apache.org/jira/browse/HBASE-2406">how timestamps work</a>, we are using
+timestamps with logical values.  Instead of just letting the region server
+assign a timestamp version to each cell, we are explicitly setting those values
+so that we can use timestamp as a true queryable dimension in our <code>get</code>s and
+<code>scan</code>s.  In addition to the real timeseries data that is indexed using the cell
+timestamp, we also have other columns that store metadata about the entity.
+That data does not need to be logically timestamped, and we always just want the
+most recent version of it.  Given this description, rows in the table look
+something like this:</p>
+
+
+    </div>
+  </div>
+  
+  <div class="post">
     <h2><a class="title" href="/2012/10/12/with-all-apologies-to-psy">With all apologies to Psy</a></h2>
     <p class="meta">by <a href="/authors/tom-vaughan">Tom Vaughan</a>
  | October 12, 2012</p>
@@ -99,18 +125,6 @@
     <div class="clearfix"></div>
     <div class="post-content">
     <p><img src="/img/bieber.jpg" alt="Justin Bieber" /></p>
-
-
-    </div>
-  </div>
-  
-  <div class="post">
-    <h2><a class="title" href="/2012/01/20/spring-configuration-and-library-decomposition">Spring Configuration and Library Decomposition</a></h2>
-    <p class="meta">by <a href="/authors/tom-vaughan">Tom Vaughan</a>
- | January 20, 2012</p>
-    <div class="clearfix"></div>
-    <div class="post-content">
-    <p>Opower has evolved rapidly in the last 24 months and nowhere is that more true than in our code base.  Two years ago we had 2 flagship applications that shared model objects, DAOs and a handful of utility classes with one common JAR.  Since then we&rsquo;ve expanded to the point where (not even counting all the Ruby or Scala stuff) we&rsquo;re managing:</p>
 
 
     </div>
